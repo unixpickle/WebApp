@@ -10,6 +10,11 @@
 		FA6330951416BFB200F702B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6330941416BFB200F702B2 /* Foundation.framework */; };
 		FA6330981416BFB200F702B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330971416BFB200F702B2 /* main.m */; };
 		FA63309C1416BFB200F702B2 /* WebApp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA63309B1416BFB200F702B2 /* WebApp.1 */; };
+		FA6330A51416C01700F702B2 /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330A41416C01700F702B2 /* Log.m */; };
+		FA6330A91416C90700F702B2 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330A81416C90700F702B2 /* HTTPServer.m */; };
+		FA6330AD1416C98A00F702B2 /* HTTPStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330AC1416C98A00F702B2 /* HTTPStream.m */; };
+		FA6330B01416CB4000F702B2 /* HTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330AF1416CB4000F702B2 /* HTTPRequest.m */; };
+		FA6330B31416CCD800F702B2 /* HTTPContentProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330B21416CCD800F702B2 /* HTTPContentProvider.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,8 +34,18 @@
 		FA6330901416BFB200F702B2 /* WebApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WebApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6330941416BFB200F702B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FA6330971416BFB200F702B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FA63309A1416BFB200F702B2 /* WebApp-Prefix.pch */ = {isa = PBXFileReference; path = "WebApp-Prefix.pch"; sourceTree = "<group>"; };
+		FA63309A1416BFB200F702B2 /* WebApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebApp-Prefix.pch"; sourceTree = "<group>"; };
 		FA63309B1416BFB200F702B2 /* WebApp.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = WebApp.1; sourceTree = "<group>"; };
+		FA6330A31416C01700F702B2 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		FA6330A41416C01700F702B2 /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
+		FA6330A71416C90700F702B2 /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
+		FA6330A81416C90700F702B2 /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
+		FA6330AB1416C98A00F702B2 /* HTTPStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStream.h; sourceTree = "<group>"; };
+		FA6330AC1416C98A00F702B2 /* HTTPStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPStream.m; sourceTree = "<group>"; };
+		FA6330AE1416CB4000F702B2 /* HTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPRequest.h; sourceTree = "<group>"; };
+		FA6330AF1416CB4000F702B2 /* HTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPRequest.m; sourceTree = "<group>"; };
+		FA6330B11416CCD800F702B2 /* HTTPContentProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPContentProvider.h; sourceTree = "<group>"; };
+		FA6330B21416CCD800F702B2 /* HTTPContentProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPContentProvider.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +88,8 @@
 		FA6330961416BFB200F702B2 /* WebApp */ = {
 			isa = PBXGroup;
 			children = (
+				FA6330A61416C8F800F702B2 /* HTTPServer */,
+				FA6330A21416BFF800F702B2 /* Logging */,
 				FA6330971416BFB200F702B2 /* main.m */,
 				FA63309B1416BFB200F702B2 /* WebApp.1 */,
 				FA6330991416BFB200F702B2 /* Supporting Files */,
@@ -86,6 +103,38 @@
 				FA63309A1416BFB200F702B2 /* WebApp-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA6330A21416BFF800F702B2 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				FA6330A31416C01700F702B2 /* Log.h */,
+				FA6330A41416C01700F702B2 /* Log.m */,
+			);
+			name = Logging;
+			sourceTree = "<group>";
+		};
+		FA6330A61416C8F800F702B2 /* HTTPServer */ = {
+			isa = PBXGroup;
+			children = (
+				FA6330B41416D05400F702B2 /* Stream */,
+				FA6330A71416C90700F702B2 /* HTTPServer.h */,
+				FA6330A81416C90700F702B2 /* HTTPServer.m */,
+				FA6330AE1416CB4000F702B2 /* HTTPRequest.h */,
+				FA6330AF1416CB4000F702B2 /* HTTPRequest.m */,
+				FA6330B11416CCD800F702B2 /* HTTPContentProvider.h */,
+				FA6330B21416CCD800F702B2 /* HTTPContentProvider.m */,
+			);
+			name = HTTPServer;
+			sourceTree = "<group>";
+		};
+		FA6330B41416D05400F702B2 /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				FA6330AB1416C98A00F702B2 /* HTTPStream.h */,
+				FA6330AC1416C98A00F702B2 /* HTTPStream.m */,
+			);
+			name = Stream;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +185,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA6330981416BFB200F702B2 /* main.m in Sources */,
+				FA6330A51416C01700F702B2 /* Log.m in Sources */,
+				FA6330A91416C90700F702B2 /* HTTPServer.m in Sources */,
+				FA6330AD1416C98A00F702B2 /* HTTPStream.m in Sources */,
+				FA6330B01416CB4000F702B2 /* HTTPRequest.m in Sources */,
+				FA6330B31416CCD800F702B2 /* HTTPContentProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
