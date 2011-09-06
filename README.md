@@ -20,7 +20,7 @@ License
 
 Currently, WebApp is under the BSD license.
 
-	Copyright (c) 2011-2012 Ryan Sullivan and Alex Nichol
+	Copyright (c) 2011-2012 Ryan (NULL) and Alex Nichol
 	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without
