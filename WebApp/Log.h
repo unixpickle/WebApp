@@ -30,7 +30,7 @@ LogMsg LogMsgMake (NSString * message, LogMsgPriority priority);
 #define LogMsgMakeWarning(x) (LogMsgMake(x, LogPriorityWarning))
 #define LogMsgMakeError(x) (LogMsgMake(x, LogPriorityError))
 
-#define kLogInitialMaxVerbosity LogPriorityWarning
+#define kLogInitialMaxVerbosity LogPriorityVerbose
 
 void WALog (LogMsgPriority priority, NSString * msgFmt, ...);
 

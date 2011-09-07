@@ -15,6 +15,7 @@
 		FA6330AD1416C98A00F702B2 /* HTTPStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330AC1416C98A00F702B2 /* HTTPStream.m */; };
 		FA6330B01416CB4000F702B2 /* HTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330AF1416CB4000F702B2 /* HTTPRequest.m */; };
 		FA6330B31416CCD800F702B2 /* HTTPContentProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330B21416CCD800F702B2 /* HTTPContentProvider.m */; };
+		FA6330BC1416E57B00F702B2 /* NSError+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330BB1416E57B00F702B2 /* NSError+Message.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,8 @@
 		FA6330AF1416CB4000F702B2 /* HTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPRequest.m; sourceTree = "<group>"; };
 		FA6330B11416CCD800F702B2 /* HTTPContentProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPContentProvider.h; sourceTree = "<group>"; };
 		FA6330B21416CCD800F702B2 /* HTTPContentProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPContentProvider.m; sourceTree = "<group>"; };
+		FA6330BA1416E57B00F702B2 /* NSError+Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Message.h"; sourceTree = "<group>"; };
+		FA6330BB1416E57B00F702B2 /* NSError+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Message.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,7 @@
 		FA6330961416BFB200F702B2 /* WebApp */ = {
 			isa = PBXGroup;
 			children = (
+				FA6330B91416E56D00F702B2 /* Util */,
 				FA6330A61416C8F800F702B2 /* HTTPServer */,
 				FA6330A21416BFF800F702B2 /* Logging */,
 				FA6330971416BFB200F702B2 /* main.m */,
@@ -135,6 +139,15 @@
 				FA6330AC1416C98A00F702B2 /* HTTPStream.m */,
 			);
 			name = Stream;
+			sourceTree = "<group>";
+		};
+		FA6330B91416E56D00F702B2 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				FA6330BA1416E57B00F702B2 /* NSError+Message.h */,
+				FA6330BB1416E57B00F702B2 /* NSError+Message.m */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +203,7 @@
 				FA6330AD1416C98A00F702B2 /* HTTPStream.m in Sources */,
 				FA6330B01416CB4000F702B2 /* HTTPRequest.m in Sources */,
 				FA6330B31416CCD800F702B2 /* HTTPContentProvider.m in Sources */,
+				FA6330BC1416E57B00F702B2 /* NSError+Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
