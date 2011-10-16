@@ -95,6 +95,21 @@
 			name = Requests;
 			sourceTree = "<group>";
 		};
+		FA4EBA1E144BA53F009E3314 /* File Server Example */ = {
+			isa = PBXGroup;
+			children = (
+				FA2058061417BDF3006F660A /* ServerExample.h */,
+				FA2058071417BDF3006F660A /* ServerExample.m */,
+				FA2057FF1417BB67006F660A /* DirectoryProvider.h */,
+				FA2058001417BB67006F660A /* DirectoryProvider.m */,
+				FA4EBA18144B7E50009E3314 /* FileProvider.h */,
+				FA4EBA19144B7E51009E3314 /* FileProvider.m */,
+				FA4EBA1B144B8A97009E3314 /* NotFoundProvider.h */,
+				FA4EBA1C144B8A97009E3314 /* NotFoundProvider.m */,
+			);
+			name = "File Server Example";
+			sourceTree = "<group>";
+		};
 		FA6330851416BFB200F702B2 = {
 			isa = PBXGroup;
 			children = (
@@ -127,14 +142,7 @@
 				FA6330A61416C8F800F702B2 /* HTTPServer */,
 				FA6330A21416BFF800F702B2 /* Logging */,
 				FA6330971416BFB200F702B2 /* main.m */,
-				FA2058061417BDF3006F660A /* ServerExample.h */,
-				FA2058071417BDF3006F660A /* ServerExample.m */,
-				FA2057FF1417BB67006F660A /* DirectoryProvider.h */,
-				FA2058001417BB67006F660A /* DirectoryProvider.m */,
-				FA4EBA18144B7E50009E3314 /* FileProvider.h */,
-				FA4EBA19144B7E51009E3314 /* FileProvider.m */,
-				FA4EBA1B144B8A97009E3314 /* NotFoundProvider.h */,
-				FA4EBA1C144B8A97009E3314 /* NotFoundProvider.m */,
+				FA4EBA1E144BA53F009E3314 /* File Server Example */,
 				FA63309B1416BFB200F702B2 /* WebApp.1 */,
 				FA6330991416BFB200F702B2 /* Supporting Files */,
 			);
