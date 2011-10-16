@@ -19,7 +19,7 @@
 }
 
 - (void)writeResponseHeaders:(HTTPStream *)aStream {
-	NSData * cTypeData = [kDefaultContentTypeHeader dataUsingEncoding:NSASCIIStringEncoding];
+	NSData * cTypeData = [kDefaultTransferEncodingHeader dataUsingEncoding:NSASCIIStringEncoding];
 	[aStream writeData:cTypeData];
 }
 

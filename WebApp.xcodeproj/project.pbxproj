@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA2058011417BB67006F660A /* SimpleProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2058001417BB67006F660A /* SimpleProvider.m */; };
+		FA2058051417BBCD006F660A /* HTTPChunkedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2058041417BBCD006F660A /* HTTPChunkedStream.m */; };
+		FA2058081417BDF3006F660A /* ServerExample.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2058071417BDF3006F660A /* ServerExample.m */; };
+		FA4EBA14144B5209009E3314 /* HTTPHeaderReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4EBA13144B5209009E3314 /* HTTPHeaderReader.m */; };
 		FA6330951416BFB200F702B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6330941416BFB200F702B2 /* Foundation.framework */; };
 		FA6330981416BFB200F702B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330971416BFB200F702B2 /* main.m */; };
 		FA63309C1416BFB200F702B2 /* WebApp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA63309B1416BFB200F702B2 /* WebApp.1 */; };
@@ -32,6 +36,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FA2057FF1417BB67006F660A /* SimpleProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleProvider.h; sourceTree = "<group>"; };
+		FA2058001417BB67006F660A /* SimpleProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleProvider.m; sourceTree = "<group>"; };
+		FA2058031417BBCD006F660A /* HTTPChunkedStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPChunkedStream.h; sourceTree = "<group>"; };
+		FA2058041417BBCD006F660A /* HTTPChunkedStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPChunkedStream.m; sourceTree = "<group>"; };
+		FA2058061417BDF3006F660A /* ServerExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerExample.h; sourceTree = "<group>"; };
+		FA2058071417BDF3006F660A /* ServerExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerExample.m; sourceTree = "<group>"; };
+		FA4EBA12144B5209009E3314 /* HTTPHeaderReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPHeaderReader.h; sourceTree = "<group>"; };
+		FA4EBA13144B5209009E3314 /* HTTPHeaderReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPHeaderReader.m; sourceTree = "<group>"; };
 		FA6330901416BFB200F702B2 /* WebApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WebApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6330941416BFB200F702B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FA6330971416BFB200F702B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -63,6 +75,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA4EBA11144B51E9009E3314 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				FA6330AE1416CB4000F702B2 /* HTTPRequest.h */,
+				FA6330AF1416CB4000F702B2 /* HTTPRequest.m */,
+				FA4EBA12144B5209009E3314 /* HTTPHeaderReader.h */,
+				FA4EBA13144B5209009E3314 /* HTTPHeaderReader.m */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
 		FA6330851416BFB200F702B2 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +118,10 @@
 				FA6330A61416C8F800F702B2 /* HTTPServer */,
 				FA6330A21416BFF800F702B2 /* Logging */,
 				FA6330971416BFB200F702B2 /* main.m */,
+				FA2058061417BDF3006F660A /* ServerExample.h */,
+				FA2058071417BDF3006F660A /* ServerExample.m */,
+				FA2057FF1417BB67006F660A /* SimpleProvider.h */,
+				FA2058001417BB67006F660A /* SimpleProvider.m */,
 				FA63309B1416BFB200F702B2 /* WebApp.1 */,
 				FA6330991416BFB200F702B2 /* Supporting Files */,
 			);
@@ -121,11 +148,10 @@
 		FA6330A61416C8F800F702B2 /* HTTPServer */ = {
 			isa = PBXGroup;
 			children = (
+				FA4EBA11144B51E9009E3314 /* Requests */,
 				FA6330B41416D05400F702B2 /* Stream */,
 				FA6330A71416C90700F702B2 /* HTTPServer.h */,
 				FA6330A81416C90700F702B2 /* HTTPServer.m */,
-				FA6330AE1416CB4000F702B2 /* HTTPRequest.h */,
-				FA6330AF1416CB4000F702B2 /* HTTPRequest.m */,
 				FA6330B11416CCD800F702B2 /* HTTPContentProvider.h */,
 				FA6330B21416CCD800F702B2 /* HTTPContentProvider.m */,
 			);
@@ -137,6 +163,8 @@
 			children = (
 				FA6330AB1416C98A00F702B2 /* HTTPStream.h */,
 				FA6330AC1416C98A00F702B2 /* HTTPStream.m */,
+				FA2058031417BBCD006F660A /* HTTPChunkedStream.h */,
+				FA2058041417BBCD006F660A /* HTTPChunkedStream.m */,
 			);
 			name = Stream;
 			sourceTree = "<group>";
@@ -204,6 +232,10 @@
 				FA6330B01416CB4000F702B2 /* HTTPRequest.m in Sources */,
 				FA6330B31416CCD800F702B2 /* HTTPContentProvider.m in Sources */,
 				FA6330BC1416E57B00F702B2 /* NSError+Message.m in Sources */,
+				FA2058011417BB67006F660A /* SimpleProvider.m in Sources */,
+				FA2058051417BBCD006F660A /* HTTPChunkedStream.m in Sources */,
+				FA2058081417BDF3006F660A /* ServerExample.m in Sources */,
+				FA4EBA14144B5209009E3314 /* HTTPHeaderReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +324,7 @@
 				FA6330A11416BFB200F702B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

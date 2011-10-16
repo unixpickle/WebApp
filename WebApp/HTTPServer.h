@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Log.h"
 #import "HTTPContentProvider.h"
+#import "HTTPChunkedStream.h"
 #import "HTTPRequest.h"
 #import "NSError+Message.h"
 

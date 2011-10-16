@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "HTTPStream.h"
 
-#define kDefaultContentTypeHeader @"Content-Type: text/html; charset=ISO-8859-1\r\n"
+#define kDefaultTransferEncodingHeader @"Transfer-Encoding: chunked\r\n"
 
 @interface HTTPContentProvider : NSObject {
 	

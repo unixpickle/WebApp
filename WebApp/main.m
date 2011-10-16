@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ServerExample.h"
 
 int main (int argc, const char * argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 
-	// insert code here...
-	NSLog(@"Hello, World!");
+	[[Log sharedLogFacility] setMaxVerbosity:LogPriorityVerbose];
+	ServerExample * example = [[ServerExample alloc] init];
+	[example startExample:8080];
+	[example release];
 
 	[pool drain];
 	return 0;

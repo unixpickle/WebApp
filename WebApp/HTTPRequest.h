@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HTTPHeaderReader.h"
 
 @interface HTTPRequest : NSObject {
 	NSString * requestPath;
@@ -14,6 +15,8 @@
 	NSString * httpVersion;
 	NSDictionary * otherFields;
 }
+
+- (id)initByReadingStream:(HTTPStream *)aStream;
 
 // getters
 - (NSString *)requestPath;
