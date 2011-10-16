@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class HTTPStream;
+
+@protocol HTTPStreamWrapper
+
+- (id)initWithStream:(HTTPStream *)aStream;
+
+@end
+
 /**
  * An abstract class for a data stream between the HTTP client and server.
  */

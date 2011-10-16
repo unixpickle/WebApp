@@ -36,10 +36,38 @@ void WALog (LogMsgPriority priority, NSString * msgFmt, ...) {
 	return aLog;
 }
 
-- (void)postLogMessage:(LogMsg)msg {
-	if ([self willPrintMessage:msg]) {
-		NSLog(@"%@", msg.message);
+- (id)init {
+	if ((self = [super init])) {
+		msgLock = [[NSLock alloc] init];
 	}
+	return self;
+}
+
+- (void)postLogMessage:(LogMsg)msg {
+	static const struct {
+		NSString * prefix;
+		LogMsgPriority priority;
+	} msgStrings[] = {
+		{@"INFO", LogPriorityInfo},
+		{@"DBUG", LogPriorityDebug},
+		{@"ERRO", LogPriorityError},
+		{@"FATL", LogPriorityFatal},
+		{@"VRBS", LogPriorityVerbose},
+		{@"WARN", LogPriorityWarning},
+	};
+	[msgLock lock];
+	if ([self willPrintMessage:msg]) {
+		NSString * prefix = @"SILENT ";
+		for (int i = 0; i < 6; i++) {
+			if (msgStrings[i].priority == msg.priority) {
+				prefix = msgStrings[i].prefix;
+			}
+		}
+		printf("[%s %s]: %s\n", [prefix UTF8String],
+			   [[[NSDate date] description] UTF8String],
+			   [msg.message UTF8String]);
+	}
+	[msgLock unlock];
 }
 
 - (BOOL)willPrintMessage:(LogMsg)msg {
@@ -50,6 +78,11 @@ void WALog (LogMsgPriority priority, NSString * msgFmt, ...) {
 
 - (void)setMaxVerbosity:(LogMsgPriority)priority {
 	maxVerbosity = priority;
+}
+
+- (void)dealloc {
+	[msgLock release];
+	[super dealloc];
 }
 
 @end

@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SimpleProvider.h"
+#import "DirectoryProvider.h"
+#import "FileProvider.h"
+#import "NotFoundProvider.h"
 #import "HTTPServer.h"
 
 @interface ServerExample : NSObject <HTTPServerDelegate> {

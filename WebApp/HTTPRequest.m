@@ -95,6 +95,27 @@
 	SETTER_IMPL(otherFields, obj);
 }
 
+/** Special Getters **/
+
+- (NSRange)rangeField {
+	NSString * range = [otherFields objectForKey:@"Range"];
+	NSRange rangeBytes = [range rangeOfString:@"bytes="];
+	NSRange rangeOfDash = [range rangeOfString:@"-"];
+	if (rangeBytes.location == NSNotFound || rangeOfDash.location == NSNotFound) {
+		return NSMakeRange(NSNotFound, NSNotFound);
+	}
+	
+	NSString * rangeStr = [range substringFromIndex:(rangeBytes.location + rangeBytes.length)];
+	NSArray * comps = [rangeStr componentsSeparatedByString:@"-"];
+	if ([comps count] != 2) {
+		return NSMakeRange(NSNotFound, NSNotFound);
+	}
+	
+	long long start = [[comps objectAtIndex:0] longLongValue];
+	long long end = [[comps objectAtIndex:1] longLongValue];
+	return NSMakeRange(start, end - start + 1);
+}
+
 /** Memory Management **/
 
 - (void)dealloc {
@@ -124,7 +145,7 @@
 	NSString * version = [versionString substringFromIndex:5];
 	
 	[self setRequestMethod:[components objectAtIndex:0]];
-	[self setRequestPath:[components objectAtIndex:1]];
+	[self setRequestPath:[[components objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 	[self setHttpVersion:version];
 	return YES;
 }

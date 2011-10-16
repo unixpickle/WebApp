@@ -10,6 +10,12 @@
 
 @implementation HTTPChunkedStream
 
+- (id)initWithStream:(HTTPStream *)aStream {
+	if ((self = [super initWithSocket:[aStream fileDescriptor]])) {
+	}
+	return self;
+}
+
 - (BOOL)writeData:(NSData *)theData {
 	NSString * length = [NSString stringWithFormat:@"%X\r\n", [theData length]];
 	NSMutableData * encoded = [[NSMutableData alloc] init];

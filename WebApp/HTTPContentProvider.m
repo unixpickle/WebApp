@@ -23,6 +23,10 @@
 	[aStream writeData:cTypeData];
 }
 
+- (Class)classForContentStream {
+	return [HTTPChunkedStream class];
+}
+
 - (void)writeDocumentBody:(HTTPStream *)aStream {
 	
 }

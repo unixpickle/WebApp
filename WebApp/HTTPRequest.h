@@ -30,4 +30,7 @@
 - (void)setHttpVersion:(NSString *)obj;
 - (void)setOtherFields:(NSDictionary *)obj;
 
+// other field getters
+- (NSRange)rangeField;
+
 @end

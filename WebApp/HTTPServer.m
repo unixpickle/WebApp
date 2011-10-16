@@ -15,6 +15,7 @@
 - (void)setIsServerClosed:(BOOL)flag;
 // connection threads
 - (NSError *)acceptServer:(int)server;
+- (void)handleConnectionThread:(NSNumber *)socket;
 - (void)handleConnection:(NSNumber *)socket;
 
 @end
@@ -43,12 +44,26 @@
 	servAddr.sin_family = AF_INET;
 	servAddr.sin_addr.s_addr = INADDR_ANY;
 	servAddr.sin_port = htons([portObj unsignedShortValue]);
+	
 	// bind the socket to the address
 	if (bind(server, (struct sockaddr *)&servAddr, sizeof(struct sockaddr_in)) < 0) {
 		[pool drain];
 		if (error) *error = [NSError errorWithDomain:@"bind" code:errno message:@"Failed to bind()."];
 		return NO;
 	}
+	
+	int keepalive = 0;
+	l.l_onoff = 1;
+	l.l_linger = 1;
+	if (setsockopt(server, SOL_SOCKET, SO_LINGER, &l, sizeof(struct linger)) != 0) {
+		WALog(LogPriorityError, @"Failed to disable SO_LINGER");
+	}
+	if (setsockopt(server, SOL_SOCKET, SO_KEEPALIVE, &keepalive, sizeof(int)) != 0) {
+		WALog(LogPriorityError, @"Failed to disable SO_LINGER");
+	}
+	keepalive = 1;
+	setsockopt(server, SOL_SOCKET, SO_NOSIGPIPE, (void *)&keepalive, sizeof(int));
+	
 	if (listen(server, 5) < 0) {
 		[pool drain];
 		if (error) *error = [NSError errorWithDomain:@"listen" code:errno message:@"Failed to listen()."];
@@ -56,13 +71,6 @@
 	}
 	
 	WALog(LogPriorityInfo, @"Listening on port: %d", htons(servAddr.sin_port));
-	
-	// disable linger
-	l.l_onoff = 1;
-	l.l_linger = 0;
-	if (setsockopt(server, SOL_SOCKET, SO_KEEPALIVE | SO_LINGER, &l, sizeof(struct linger)) < 0) {
-		WALog(LogPriorityWarning, @"Failed to disable SO_LINGER and SO_KEEPALIVE");
-	}
 	
 	BOOL retStatus = YES;
 	
@@ -144,14 +152,26 @@
 		return [NSError errorWithDomain:@"accept" code:errno 
 								message:@"Failed to accept() conncetion from socket."];
 	}
+	int sigPipe = 1;
+	setsockopt(cliSock, SOL_SOCKET, SO_NOSIGPIPE, (void *)&sigPipe, sizeof(int));
+	
 	ipAddr = inet_ntoa(cliAddr.sin_addr);
 	WALog(LogPriorityInfo, @"Connected from: %s", ipAddr);
 	// TODO: hand the socket off to another thread.
 	NSNumber * sockNum = [[NSNumber alloc] initWithInt:cliSock];
-	[NSThread detachNewThreadSelector:@selector(handleConnection:) toTarget:self withObject:sockNum];
+	[NSThread detachNewThreadSelector:@selector(handleConnectionThread:) toTarget:self withObject:sockNum];
 	[sockNum release];
 	
 	return nil;
+}
+
+- (void)handleConnectionThread:(NSNumber *)socket {
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	@try {
+		[self handleConnection:socket];
+	} @catch (NSException * e) {
+	}
+	[pool drain];
 }
 
 - (void)handleConnection:(NSNumber *)socket {
@@ -182,11 +202,15 @@
 		[provider writeResponseHeaders:stream];
 		[stream writeData:[@"\r\n" dataUsingEncoding:NSASCIIStringEncoding]];
 		
-		HTTPChunkedStream * chunked = [[HTTPChunkedStream alloc] initWithSocket:[stream fileDescriptor]];
-		[provider writeDocumentBody:chunked];
-		NSLog(@"Closing chunked: %@", chunked);
-		[chunked closeStream];
-		[chunked release];
+		Class transportClass = [provider classForContentStream];
+		if ([transportClass conformsToProtocol:@protocol(HTTPStreamWrapper)]) {		
+			HTTPStream * newStream = [(HTTPStream<HTTPStreamWrapper> *)[transportClass alloc] initWithSocket:[stream fileDescriptor]];
+			[provider writeDocumentBody:newStream];
+			[newStream closeStream];
+			[newStream release];
+		} else {
+			WALog(LogPriorityError, @"Invalid class from provider: %@", NSStringFromClass(transportClass));
+		}
 	}
 	
 	[stream closeStream];

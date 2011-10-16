@@ -9,9 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "ServerExample.h"
 
+void sigpipeHandler (int i);
+
+void sigpipeHandler (int i) {
+	WALog(LogPriorityError, @"Received SIGPIPE: %d", i);
+}
+
 int main (int argc, const char * argv[]) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 
+	signal(SIGPIPE, sigpipeHandler);
+	
 	[[Log sharedLogFacility] setMaxVerbosity:LogPriorityVerbose];
 	ServerExample * example = [[ServerExample alloc] init];
 	[example startExample:8080];

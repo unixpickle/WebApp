@@ -39,6 +39,7 @@ void WALog (LogMsgPriority priority, NSString * msgFmt, ...);
  */
 @interface Log : NSObject {
 	LogMsgPriority maxVerbosity;
+	NSLock * msgLock;
 }
 
 /**

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "HTTPStream.h"
+#import "HTTPChunkedStream.h"
 
 #define kDefaultTransferEncodingHeader @"Transfer-Encoding: chunked\r\n"
 
@@ -33,6 +34,13 @@
  * need to be written, this can be an empty method.
  */
 - (void)writeResponseHeaders:(HTTPStream *)aStream;
+
+/**
+ * @return A custom HTTPStream subclass that responds to the HTTPStreamWrapper
+ * protocol. The base class returns NSHTTPChunkedStream, but any other
+ * stream would work (for different transfer encodings).
+ */
+- (Class)classForContentStream;
 
 /**
  * Called when it is time for the content provider to write the contents of

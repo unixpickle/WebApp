@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FA2058011417BB67006F660A /* SimpleProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2058001417BB67006F660A /* SimpleProvider.m */; };
+		FA2058011417BB67006F660A /* DirectoryProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2058001417BB67006F660A /* DirectoryProvider.m */; };
 		FA2058051417BBCD006F660A /* HTTPChunkedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2058041417BBCD006F660A /* HTTPChunkedStream.m */; };
 		FA2058081417BDF3006F660A /* ServerExample.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2058071417BDF3006F660A /* ServerExample.m */; };
 		FA4EBA14144B5209009E3314 /* HTTPHeaderReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4EBA13144B5209009E3314 /* HTTPHeaderReader.m */; };
+		FA4EBA17144B7A25009E3314 /* HTTPStreamWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4EBA16144B7A24009E3314 /* HTTPStreamWrapper.m */; };
+		FA4EBA1A144B7E51009E3314 /* FileProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4EBA19144B7E51009E3314 /* FileProvider.m */; };
+		FA4EBA1D144B8A97009E3314 /* NotFoundProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4EBA1C144B8A97009E3314 /* NotFoundProvider.m */; };
 		FA6330951416BFB200F702B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6330941416BFB200F702B2 /* Foundation.framework */; };
 		FA6330981416BFB200F702B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6330971416BFB200F702B2 /* main.m */; };
 		FA63309C1416BFB200F702B2 /* WebApp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA63309B1416BFB200F702B2 /* WebApp.1 */; };
@@ -36,14 +39,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FA2057FF1417BB67006F660A /* SimpleProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleProvider.h; sourceTree = "<group>"; };
-		FA2058001417BB67006F660A /* SimpleProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleProvider.m; sourceTree = "<group>"; };
+		FA2057FF1417BB67006F660A /* DirectoryProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryProvider.h; sourceTree = "<group>"; };
+		FA2058001417BB67006F660A /* DirectoryProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryProvider.m; sourceTree = "<group>"; };
 		FA2058031417BBCD006F660A /* HTTPChunkedStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPChunkedStream.h; sourceTree = "<group>"; };
 		FA2058041417BBCD006F660A /* HTTPChunkedStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPChunkedStream.m; sourceTree = "<group>"; };
 		FA2058061417BDF3006F660A /* ServerExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerExample.h; sourceTree = "<group>"; };
 		FA2058071417BDF3006F660A /* ServerExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerExample.m; sourceTree = "<group>"; };
 		FA4EBA12144B5209009E3314 /* HTTPHeaderReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPHeaderReader.h; sourceTree = "<group>"; };
 		FA4EBA13144B5209009E3314 /* HTTPHeaderReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPHeaderReader.m; sourceTree = "<group>"; };
+		FA4EBA15144B7A24009E3314 /* HTTPStreamWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPStreamWrapper.h; sourceTree = "<group>"; };
+		FA4EBA16144B7A24009E3314 /* HTTPStreamWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPStreamWrapper.m; sourceTree = "<group>"; };
+		FA4EBA18144B7E50009E3314 /* FileProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileProvider.h; sourceTree = "<group>"; };
+		FA4EBA19144B7E51009E3314 /* FileProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileProvider.m; sourceTree = "<group>"; };
+		FA4EBA1B144B8A97009E3314 /* NotFoundProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotFoundProvider.h; sourceTree = "<group>"; };
+		FA4EBA1C144B8A97009E3314 /* NotFoundProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotFoundProvider.m; sourceTree = "<group>"; };
 		FA6330901416BFB200F702B2 /* WebApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WebApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6330941416BFB200F702B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FA6330971416BFB200F702B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -120,8 +129,12 @@
 				FA6330971416BFB200F702B2 /* main.m */,
 				FA2058061417BDF3006F660A /* ServerExample.h */,
 				FA2058071417BDF3006F660A /* ServerExample.m */,
-				FA2057FF1417BB67006F660A /* SimpleProvider.h */,
-				FA2058001417BB67006F660A /* SimpleProvider.m */,
+				FA2057FF1417BB67006F660A /* DirectoryProvider.h */,
+				FA2058001417BB67006F660A /* DirectoryProvider.m */,
+				FA4EBA18144B7E50009E3314 /* FileProvider.h */,
+				FA4EBA19144B7E51009E3314 /* FileProvider.m */,
+				FA4EBA1B144B8A97009E3314 /* NotFoundProvider.h */,
+				FA4EBA1C144B8A97009E3314 /* NotFoundProvider.m */,
 				FA63309B1416BFB200F702B2 /* WebApp.1 */,
 				FA6330991416BFB200F702B2 /* Supporting Files */,
 			);
@@ -165,6 +178,8 @@
 				FA6330AC1416C98A00F702B2 /* HTTPStream.m */,
 				FA2058031417BBCD006F660A /* HTTPChunkedStream.h */,
 				FA2058041417BBCD006F660A /* HTTPChunkedStream.m */,
+				FA4EBA15144B7A24009E3314 /* HTTPStreamWrapper.h */,
+				FA4EBA16144B7A24009E3314 /* HTTPStreamWrapper.m */,
 			);
 			name = Stream;
 			sourceTree = "<group>";
@@ -232,10 +247,13 @@
 				FA6330B01416CB4000F702B2 /* HTTPRequest.m in Sources */,
 				FA6330B31416CCD800F702B2 /* HTTPContentProvider.m in Sources */,
 				FA6330BC1416E57B00F702B2 /* NSError+Message.m in Sources */,
-				FA2058011417BB67006F660A /* SimpleProvider.m in Sources */,
+				FA2058011417BB67006F660A /* DirectoryProvider.m in Sources */,
 				FA2058051417BBCD006F660A /* HTTPChunkedStream.m in Sources */,
 				FA2058081417BDF3006F660A /* ServerExample.m in Sources */,
 				FA4EBA14144B5209009E3314 /* HTTPHeaderReader.m in Sources */,
+				FA4EBA17144B7A25009E3314 /* HTTPStreamWrapper.m in Sources */,
+				FA4EBA1A144B7E51009E3314 /* FileProvider.m in Sources */,
+				FA4EBA1D144B8A97009E3314 /* NotFoundProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 
 #import "HTTPStream.h"
 
-@interface HTTPChunkedStream : HTTPStream {
+@interface HTTPChunkedStream : HTTPStream <HTTPStreamWrapper> {
 	
 }
 
