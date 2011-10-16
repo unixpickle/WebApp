@@ -145,7 +145,7 @@
 - (NSError *)acceptServer:(int)server {
 	const char * ipAddr;
 	struct sockaddr_in cliAddr;
-	socklen_t cliLen;
+	socklen_t cliLen = sizeof(struct sockaddr_in);
 	int cliSock = accept(server, (struct sockaddr *)&cliAddr, &cliLen);
 	if (cliSock < 0) {
 		WALog(LogPriorityError, @"Failed to accept from socket %d", server);
