@@ -10,6 +10,8 @@ Efficiency
 
 The current plans for the WebApp framework include those for managing threads.  It is planned that the user of the framework will be able to set a *max thread count*.  If the number of threads exceeds this *max thread count*, new HTTP requests will be queued on existing server threads.  On a system like Mach, creating a thread is much less costly than creating a task, and is therefore more efficient than spawning a new process for every request like Apache does.
 
+Update: I am too lazy to implement this.
+
 GNUstep Compatibility
 =====================
 
