@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "HTTPStream.h"
 #import "HTTPChunkedStream.h"
+#import "ARCHelper.h"
 
 #define kDefaultTransferEncodingHeader @"Transfer-Encoding: chunked\r\n"
 

@@ -42,6 +42,9 @@
 }
 
 - (BOOL)writeData:(NSData *)theData {
+    FILE * fp = fopen("/Users/alex/Desktop/log.txt", "a+");
+    fwrite([theData bytes], [theData length], 1, fp);
+    fclose(fp);
 	const char * buffer = (const char *)[theData bytes];
 	ssize_t written = 0;
 	while (written < [theData length]) {
@@ -84,19 +87,31 @@
 		if (timeLeft < 0) {
 			return data;
 		}
+#if !__has_feature(objc_arc)
 		NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+#else
+        @autoreleasepool {
+#endif
 		NSData * someData = [self readIndefiniteData:(length - [data length]) timeout:timeLeft];
 		if (!someData) {
+#if !__has_feature(objc_arc)
 			[pool drain];
 			[data release];
+#endif
 			return nil;
 		}
 		[data appendData:someData];
-		[pool drain];
+#if !__has_feature(objc_arc)
+        [pool drain];
+#else
+        }
+#endif
 	}
 	
 	NSData * immutable = [NSData dataWithData:data];
+#if !__has_feature(objc_arc)
 	[data release];
+#endif
 	return immutable;
 }
 
@@ -108,10 +123,12 @@
 	[ivarLock unlock];
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc {
 	[ivarLock release];
 	[super dealloc];
 }
+#endif
 
 @end
 

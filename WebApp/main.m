@@ -16,16 +16,24 @@ void sigpipeHandler (int i) {
 }
 
 int main (int argc, const char * argv[]) {
+#if !__has_feature(objc_arc)
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-
+#else
+    @autoreleasepool {
+#endif
+    
 	signal(SIGPIPE, sigpipeHandler);
 	
 	[[Log sharedLogFacility] setMaxVerbosity:LogPriorityVerbose];
 	ServerExample * example = [[ServerExample alloc] init];
-	[example startExample:8080];
-	[example release];
+	[example startExample:arc4random() * 1000 + 1000];
 
-	[pool drain];
+#if !__has_feature(objc_arc)
+	[example release];
+    [pool drain];
+#else
+    }
+#endif
 	return 0;
 }
 

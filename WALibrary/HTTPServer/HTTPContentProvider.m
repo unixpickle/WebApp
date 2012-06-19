@@ -11,7 +11,7 @@
 @implementation HTTPContentProvider
 
 - (NSString *)responseMessage {
-	return nil;
+	return @"OK";
 }
 
 - (int)responseCode {

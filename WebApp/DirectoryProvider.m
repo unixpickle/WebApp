@@ -12,7 +12,11 @@
 
 - (id)initWithDirectory:(NSString *)aDir {
 	if ((self = [super init])) {
+#if !__has_feature(objc_arc)
 		dirPath = [aDir retain];
+#else
+        dirPath = aDir;
+#endif
 	}
 	return self;
 }
@@ -53,14 +57,26 @@
 }
 
 - (void)writeString:(NSString *)asciiString toStream:(HTTPStream *)stream {
+#if !__has_feature(objc_arc)
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+#else
+    @autoreleasepool {
+#endif
+
 	[stream writeData:[asciiString dataUsingEncoding:NSASCIIStringEncoding]];
+
+#if !__has_feature(objc_arc)
 	[pool drain];
+#else
+    }
+#endif
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc {
 	[dirPath release];
 	[super dealloc];
 }
+#endif
 
 @end

@@ -70,6 +70,7 @@
 		FA6330971416BFB200F702B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FA63309A1416BFB200F702B2 /* WebApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebApp-Prefix.pch"; sourceTree = "<group>"; };
 		FA63309B1416BFB200F702B2 /* WebApp.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = WebApp.1; sourceTree = "<group>"; };
+		FAC80178159120390028E1B2 /* ARCHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARCHelper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +146,7 @@
 			children = (
 				FA0B4321147DC7B800C2DD50 /* NSError+Message.h */,
 				FA0B4322147DC7B800C2DD50 /* NSError+Message.m */,
+				FAC80178159120390028E1B2 /* ARCHelper.h */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -327,6 +329,7 @@
 		FA6330A01416BFB200F702B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WebApp/WebApp-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -336,6 +339,7 @@
 		FA6330A11416BFB200F702B2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WebApp/WebApp-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";

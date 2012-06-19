@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "HTTPStream.h"
+#import "ARCHelper.h"
 
 #define kHeaderReadTimeout 60
 

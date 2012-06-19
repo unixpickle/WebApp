@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "HTTPHeaderReader.h"
+#import "ARCHelper.h"
 
 @interface HTTPRequest : NSObject {
 	NSString * requestPath;

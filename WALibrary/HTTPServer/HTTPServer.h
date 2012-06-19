@@ -12,6 +12,7 @@
 #import "HTTPChunkedStream.h"
 #import "HTTPRequest.h"
 #import "NSError+Message.h"
+#import "ARCHelper.h"
 
 // network-related imports
 #include <sys/socket.h>

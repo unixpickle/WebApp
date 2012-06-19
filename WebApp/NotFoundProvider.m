@@ -12,7 +12,11 @@
 
 - (id)initWithRequest:(HTTPRequest *)aRequest {
 	if ((self = [super init])) {
+#if !__has_feature(objc_arc)
 		request = [aRequest retain];
+#else
+        request = aRequest;
+#endif
 	}
 	return self;
 }
@@ -36,9 +40,11 @@
 						dataUsingEncoding:NSASCIIStringEncoding]];
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc {
 	[request release];
 	[super dealloc];
 }
+#endif
 
 @end

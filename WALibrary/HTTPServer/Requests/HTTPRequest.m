@@ -6,8 +6,12 @@
 //  Copyright 2011 Ryan & Alex. All rights reserved.
 //
 
+#if __has_feature(objc_arc)
+#define SETTER_IMPL(ivar, param) ivar = param;
+#else
 #define SETTER_IMPL(ivar, param) [ivar autorelease];\
 	ivar = [param retain];
+#endif
 
 #import "HTTPRequest.h"
 
@@ -26,13 +30,17 @@
 		NSString * httpRequestField = [headerReader readLine];
 		
 		if (!httpRequestField) {
+#if !__has_feature(objc_arc)
 			[headerReader release];
 			[super dealloc];
+#endif
 			return nil;
 		}
 		
 		if (![self useHTTPRequestLine:httpRequestField]) {
+#if !__has_feature(objc_arc)
 			[super dealloc];
+#endif
 			return nil;
 		}
 		
@@ -47,14 +55,20 @@
 			}
 			[myHeaders setObject:nextVal forKey:nextKey];
 		}
+#if !__has_feature(objc_arc)
 		[headerReader release];
+#endif
 		if (!terminated) {
+#if !__has_feature(objc_arc)
 			[myHeaders release];
 			[self dealloc];
+#endif
 			return nil;
 		}
 		otherFields = [[NSDictionary alloc] initWithDictionary:myHeaders];
+#if !__has_feature(objc_arc)
 		[myHeaders release];
+#endif
 	}
 	return self;
 }
@@ -118,6 +132,7 @@
 
 /** Memory Management **/
 
+#if !__has_feature(objc_arc)
 - (void)dealloc {
 	[self setRequestPath:nil];
 	[self setRequestMethod:nil];
@@ -125,6 +140,7 @@
 	[self setOtherFields:nil];
 	[super dealloc];
 }
+#endif
 
 @end
 

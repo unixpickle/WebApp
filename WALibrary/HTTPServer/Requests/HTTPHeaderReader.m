@@ -12,7 +12,11 @@
 
 - (id)initWithStream:(HTTPStream *)aStream {
 	if ((self = [super init])) {
+#if !__has_feature(objc_arc)
 		stream = [aStream retain];
+#else
+        stream = aStream;
+#endif
 	}
 	return self;
 }
@@ -26,16 +30,24 @@
 	NSDate * endDate = [NSDate dateWithTimeIntervalSinceNow:timeLeft];
 	NSMutableString * string = [[NSMutableString alloc] init];
 	while (timeLeft > 0) {
+#if !__has_feature(objc_arc)
 		NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+#else
+        @autoreleasepool {
+#endif
 		NSData * aChar = [stream readData:1 timeout:timeLeft];
 		if (!aChar || [aChar length] == 0) {
+#if !__has_feature(objc_arc)
 			[string release];
 			[pool drain];
+#endif
 			return nil;
 		}
 		char ascii = *((const char *)[aChar bytes]);
 		if (ascii == '\n') {
+#if !__has_feature(objc_arc)
 			[pool drain];
+#endif
 			break;
 		}
 		if (isascii(ascii)) {
@@ -43,21 +55,31 @@
 				[string appendFormat:@"%c", ascii];
 			}
 		} else {
+#if !__has_feature(objc_arc)
 			[string release];
 			[pool drain];
+#endif
 			return nil;
 		}
-		[pool drain];
+#if !__has_feature(objc_arc)
+            [pool drain];
+#else
+        }
+#endif
 		timeLeft = [endDate timeIntervalSinceNow];
 	}
 	
 	if (timeLeft <= 0) {
+#if !__has_feature(objc_arc)
 		[string release];
+#endif
 		return nil;
 	}
 	
 	NSString * immutable = [NSString stringWithString:string];
+#if !__has_feature(objc_arc)
 	[string release];
+#endif
 	return immutable;
 }
 
@@ -82,9 +104,11 @@
 	return YES;
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc {
 	[stream release];
 	[super dealloc];
 }
+#endif
 
 @end

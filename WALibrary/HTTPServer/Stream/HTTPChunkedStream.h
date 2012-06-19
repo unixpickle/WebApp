@@ -7,6 +7,7 @@
 //
 
 #import "HTTPStream.h"
+#import "ARCHelper.h"
 
 @interface HTTPChunkedStream : HTTPStream <HTTPStreamWrapper> {
 	

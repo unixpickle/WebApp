@@ -12,11 +12,18 @@
 
 - (id)initWithFilePath:(NSString *)aFile {
 	if ((self = [super init])) {
+#if !__has_feature(objc_arc)
 		contentType = [[self mimeTypeForFile:aFile] retain];
 		filePath = [aFile retain];
+#else
+		contentType = [self mimeTypeForFile:aFile];
+		filePath = aFile;
+#endif
 		NSDictionary * attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:aFile error:nil];
 		if (!attributes) {
+#if !__has_feature(objc_arc)
 			[self dealloc];
+#endif
 			return nil;
 		}
 		fileSize = [[attributes objectForKey:NSFileSize] unsignedLongLongValue];
@@ -26,18 +33,27 @@
 
 - (id)initWithFilePath:(NSString *)aFile range:(NSRange)aRange {
 	if ((self = [super init])) {
+#if !__has_feature(objc_arc)
 		contentType = [[self mimeTypeForFile:aFile] retain];
 		filePath = [aFile retain];
+#else
+        contentType = [self mimeTypeForFile:aFile];
+		filePath = aFile;
+#endif
 		NSDictionary * attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:aFile error:nil];
 		if (!attributes) {
+#if !__has_feature(objc_arc)
 			[self dealloc];
+#endif
 			return nil;
 		}
 		fileSize = [[attributes objectForKey:NSFileSize] unsignedLongLongValue];
 		contentRange = aRange;
 		isRanged = YES;
 		if (contentRange.location + contentRange.length > fileSize) {
+#if !__has_feature(objc_arc)
 			[self dealloc];
+#endif
 			return nil;
 		}
 	}
@@ -72,49 +88,86 @@
 	NSData * readData = nil;
 	if (!isRanged) {
 		while (true) {
+#if !__has_feature(objc_arc)
 			NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+#else
+            @autoreleasepool {
+#endif
 			readData = [fh readDataOfLength:65536];
 			if ([readData length] == 0 || !readData) {
-				[pool drain];
+#if !__has_feature(objc_arc)
+                [pool drain];
+#endif
 				break;
 			}
 			if (![aStream writeData:readData]) {
-				[pool drain];
+#if !__has_feature(objc_arc)
+                [pool drain];
+#endif
 				break;
 			}
-			[pool drain];
+#if !__has_feature(objc_arc)
+            [pool drain];
+#else
+            }
+#endif
 		}
 	} else {
 		NSUInteger left = contentRange.length;
 		[fh seekToFileOffset:contentRange.location];
 		while (left > 0) {
+#if !__has_feature(objc_arc)
 			NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-			readData = [fh readDataOfLength:left];
+#else
+            @autoreleasepool {
+#endif
+            readData = [fh readDataOfLength:left];
 			if ([readData length] == 0 || !readData) {
-				[pool drain];
+#if !__has_feature(objc_arc)
+                [pool drain];
+#endif
 				break;
 			}
 			if (![aStream writeData:readData]) {
-				[pool drain];
+#if !__has_feature(objc_arc)
+                [pool drain];
+#endif
 				break;
 			}
 			left -= [readData length];
-			[pool drain];
+#if !__has_feature(objc_arc)
+            [pool drain];
+#else
+            }
+#endif
 		}
 	}
 	[fh closeFile];
 }
 
 - (void)writeString:(NSString *)asciiString toStream:(HTTPStream *)stream {
+#if !__has_feature(objc_arc)
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+#else
+    @autoreleasepool {
+#endif
 	[stream writeData:[asciiString dataUsingEncoding:NSASCIIStringEncoding]];
+#if !__has_feature(objc_arc)
 	[pool drain];
+#else
+    }
+#endif
 }
 
 - (NSString *)mimeTypeForFile:(NSString *)fileName {
 	const struct {
+#if !__has_feature(objc_arc)
 		NSString * extension;
 		NSString * mimeType;
+#else
+        __unsafe_unretained NSString * extension;
+		__unsafe_unretained NSString * mimeType;
+#endif
 	} mimeToExtension[] = {
 		{@"jpg", @"image/jpeg"},
 		{@"jpeg", @"image/jpeg"},
@@ -140,10 +193,12 @@
 	return @"application/octet-stream";
 }
 
+#if !__has_feature(objc_arc)
 - (void)dealloc {
 	[filePath release];
 	[contentType release];
 	[super dealloc];
 }
+#endif
 
 @end

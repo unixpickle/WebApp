@@ -23,7 +23,12 @@
 	[encoded appendData:theData];
 	[encoded appendData:[@"\r\n" dataUsingEncoding:NSASCIIStringEncoding]];
 	BOOL status = [super writeData:encoded];
+#if !__has_feature(objc_arc)
 	[encoded release];
+#endif
+    if (!status) {
+        NSLog(@"Poop");
+    }
 	return status;
 }
 

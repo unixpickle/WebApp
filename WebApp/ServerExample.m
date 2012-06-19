@@ -20,7 +20,9 @@
 			WALog(LogPriorityFatal, @"Server failed with no error.");
 		}
 	}
+#if !__has_feature(objc_arc)
 	[server release];
+#endif
 }
 
 /* Server delegate */
@@ -29,23 +31,43 @@
 	BOOL isDir = NO;
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[request requestPath] isDirectory:&isDir]) {
 		if (isDir) {
+#if !__has_feature(objc_arc)
 			return [[[DirectoryProvider alloc] initWithDirectory:[request requestPath]] autorelease];
+#else
+			return [[DirectoryProvider alloc] initWithDirectory:[request requestPath]];
+#endif
 		} else {
 			if (![[request otherFields] objectForKey:@"Range"]) {
 				WALog(LogPriorityDebug, @"Request: %@", [request otherFields]);
+#if !__has_feature(objc_arc)
 				return [[[FileProvider alloc] initWithFilePath:[request requestPath]] autorelease];
+#else
+				return [[FileProvider alloc] initWithFilePath:[request requestPath]];
+#endif
 			} else {
 				WALog(LogPriorityDebug, @"Ranged Request: %@", [request otherFields]);
 				NSRange range = [request rangeField];
 				if (range.location == NSNotFound) {
+#if !__has_feature(objc_arc)
 					return [[[NotFoundProvider alloc] initWithRequest:request] autorelease];
+#else
+					return [[NotFoundProvider alloc] initWithRequest:request];
+#endif
 				} else {
+#if !__has_feature(objc_arc)
 					return [[[FileProvider alloc] initWithFilePath:[request requestPath] range:range] autorelease];
+#else
+					return [[FileProvider alloc] initWithFilePath:[request requestPath] range:range];
+#endif
 				}
 			}
 		}
 	} else {
+#if !__has_feature(objc_arc)
 		return [[[NotFoundProvider alloc] initWithRequest:request] autorelease];
+#else
+		return [[NotFoundProvider alloc] initWithRequest:request];
+#endif
 	}
 	return nil;
 }

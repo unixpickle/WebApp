@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ARCHelper.h"
 
 typedef enum {
 	LogPriorityFatal = 0,
@@ -19,7 +20,11 @@ typedef enum {
 } LogMsgPriority;
 
 typedef struct {
-	NSString * message;
+#if !__has_feature(objc_arc)
+    NSString * message;
+#else
+	__unsafe_unretained NSString * message;
+#endif
 	LogMsgPriority priority;
 } LogMsg;
 

@@ -33,7 +33,9 @@
 
 - (BOOL)beginServer:(NSNumber *)portObj error:(NSError **)error {
 	// We need a global pool for this thread (if this runs in the background).
+#if !__has_feature(objc_arc)
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+#endif
 	[self setIsServerClosed:NO];
 	// start a socket server
 	struct sockaddr_in servAddr;
@@ -47,7 +49,9 @@
 	
 	// bind the socket to the address
 	if (bind(server, (struct sockaddr *)&servAddr, sizeof(struct sockaddr_in)) < 0) {
+#if !__has_feature(objc_arc)
 		[pool drain];
+#endif
 		if (error) *error = [NSError errorWithDomain:@"bind" code:errno message:@"Failed to bind()."];
 		return NO;
 	}
@@ -65,7 +69,9 @@
 	setsockopt(server, SOL_SOCKET, SO_NOSIGPIPE, (void *)&keepalive, sizeof(int));
 	
 	if (listen(server, 5) < 0) {
+#if !__has_feature(objc_arc)
 		[pool drain];
+#endif
 		if (error) *error = [NSError errorWithDomain:@"listen" code:errno message:@"Failed to listen()."];
 		return NO;
 	}
@@ -105,14 +111,17 @@
 		}
 	}
 	
+#if !__has_feature(objc_arc)
 	if (error) {
 		[*error retain];
 	}
-	
-	[pool drain];
+    
+    [pool drain];
 	if (error) {
 		[*error autorelease];
 	}
+#endif
+    
 	return retStatus;
 }
 
@@ -160,18 +169,25 @@
 	// TODO: hand the socket off to another thread.
 	NSNumber * sockNum = [[NSNumber alloc] initWithInt:cliSock];
 	[NSThread detachNewThreadSelector:@selector(handleConnectionThread:) toTarget:self withObject:sockNum];
+#if !__has_feature(objc_arc)
 	[sockNum release];
+#endif
 	
 	return nil;
 }
 
 - (void)handleConnectionThread:(NSNumber *)socket {
+#if !__has_feature(objc_arc)
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+#endif
 	@try {
 		[self handleConnection:socket];
 	} @catch (NSException * e) {
+        NSLog(@"Exception: %@", e);
 	}
+#if !__has_feature(objc_arc)
 	[pool drain];
+#endif
 }
 
 - (void)handleConnection:(NSNumber *)socket {
@@ -189,11 +205,16 @@
 	if (!request) {
 		WALog(LogPriorityError, @"Failed to read header from stream: %@", stream);
 		[stream closeStream];
+#if !__has_feature(objc_arc)
 		[stream release];
+#endif
 		return;
 	}
+    
+    NSLog(@"Request: %@", request.otherFields);
 	
 	HTTPContentProvider * provider = [delegate httpServer:self providerForRequest:request];
+	WALog(LogPriorityDebug, @"-writingToProvider: %@", provider );
 	if (provider) {
 		NSString * responseString = [NSString stringWithFormat:@"HTTP/%@ %d %@\r\n",
 									 [request httpVersion], [provider responseCode],
@@ -207,14 +228,20 @@
 			HTTPStream * newStream = [(HTTPStream<HTTPStreamWrapper> *)[transportClass alloc] initWithSocket:[stream fileDescriptor]];
 			[provider writeDocumentBody:newStream];
 			[newStream closeStream];
+#if !__has_feature(objc_arc)
 			[newStream release];
+#endif
 		} else {
 			WALog(LogPriorityError, @"Invalid class from provider: %@", NSStringFromClass(transportClass));
 		}
 	}
 	
+    sleep(1);
+    
 	[stream closeStream];
+#if !__has_feature(objc_arc)
 	[stream release];
+#endif
 }
 
 @end
