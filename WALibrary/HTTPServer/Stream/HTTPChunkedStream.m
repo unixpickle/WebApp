@@ -26,9 +26,6 @@
 #if !__has_feature(objc_arc)
 	[encoded release];
 #endif
-    if (!status) {
-        NSLog(@"Poop");
-    }
 	return status;
 }
 
@@ -43,7 +40,7 @@
 }
 
 - (void)closeStream {
-	NSString * term = [NSString stringWithFormat:@"0\r\n"];
+	NSString * term = [NSString stringWithFormat:@"0\r\n\r\n"];
 	[super writeData:[term dataUsingEncoding:NSASCIIStringEncoding]];
 }
 
