@@ -183,7 +183,6 @@
 	@try {
 		[self handleConnection:socket];
 	} @catch (NSException * e) {
-        NSLog(@"Exception: %@", e);
 	}
 #if !__has_feature(objc_arc)
 	[pool drain];
@@ -210,9 +209,7 @@
 #endif
 		return;
 	}
-    
-    NSLog(@"Request: %@", request.otherFields);
-	
+    	
 	HTTPContentProvider * provider = [delegate httpServer:self providerForRequest:request];
 	WALog(LogPriorityDebug, @"-writingToProvider: %@", provider );
 	if (provider) {

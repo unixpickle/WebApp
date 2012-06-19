@@ -42,9 +42,6 @@
 }
 
 - (BOOL)writeData:(NSData *)theData {
-    FILE * fp = fopen("/Users/alex/Desktop/log.txt", "a+");
-    fwrite([theData bytes], [theData length], 1, fp);
-    fclose(fp);
 	const char * buffer = (const char *)[theData bytes];
 	ssize_t written = 0;
 	while (written < [theData length]) {
