@@ -46,6 +46,11 @@
 	servAddr.sin_addr.s_addr = INADDR_ANY;
 	servAddr.sin_port = htons([portObj unsignedShortValue]);
 	
+    int reuseAddr = 1;
+	if (setsockopt(server, SOL_SOCKET, SO_REUSEADDR, &reuseAddr, sizeof(int)) != 0) {
+		WALog(LogPriorityWarning, @"Failed to disable SO_REUSEADDR");
+	}
+    
 	// bind the socket to the address
 	if (bind(server, (struct sockaddr *)&servAddr, sizeof(struct sockaddr_in)) < 0) {
 #if !__has_feature(objc_arc)
@@ -56,15 +61,14 @@
 	}
 	
 	int keepalive = 0;
-	int reuseAddr = 1;
-	if (setsockopt(server, SOL_SOCKET, SO_REUSEADDR, &reuseAddr, sizeof(int)) != 0) {
-		WALog(LogPriorityError, @"Failed to disable SO_LINGER");
-	}
 	if (setsockopt(server, SOL_SOCKET, SO_KEEPALIVE, &keepalive, sizeof(int)) != 0) {
-		WALog(LogPriorityError, @"Failed to disable SO_LINGER");
+		WALog(LogPriorityError, @"Failed to disable SO_KEEPALIVE");
 	}
-	keepalive = 1;
-	setsockopt(server, SOL_SOCKET, SO_NOSIGPIPE, (void *)&keepalive, sizeof(int));
+    
+	int noSigPipe = 1;
+	if (setsockopt(server, SOL_SOCKET, SO_NOSIGPIPE, (void *)&noSigPipe, sizeof(int)) != 0) {
+        WALog(LogPriorityError, @"Failed to disable SO_NOSIGPIPE");
+    }
 	
 	if (listen(server, 5) < 0) {
 #if !__has_feature(objc_arc)
