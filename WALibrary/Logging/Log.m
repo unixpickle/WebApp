@@ -22,6 +22,9 @@ void WALog (LogMsgPriority priority, NSString * msgFmt, ...) {
 	va_end(myList);
 	LogMsg aMsg = LogMsgMake(myString, priority);
 	[[Log sharedLogFacility] postLogMessage:aMsg];
+#if !__has_feature(objc_arc)
+    [myString release];
+#endif
 }
 
 @implementation Log

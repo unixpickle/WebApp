@@ -232,11 +232,10 @@
 			WALog(LogPriorityError, @"Invalid class from provider: %@", NSStringFromClass(transportClass));
 		}
 	}
-	
-    sleep(1);
-    
+	    
 	[stream closeStream];
 #if !__has_feature(objc_arc)
+    [request release];
 	[stream release];
 #endif
 }
