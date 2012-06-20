@@ -26,7 +26,7 @@ int main (int argc, const char * argv[]) {
 	
 	[[Log sharedLogFacility] setMaxVerbosity:LogPriorityVerbose];
 	ServerExample * example = [[ServerExample alloc] init];
-	[example startExample:arc4random() * 1000 + 1000];
+	[example startExample:8080];
 
 #if !__has_feature(objc_arc)
 	[example release];

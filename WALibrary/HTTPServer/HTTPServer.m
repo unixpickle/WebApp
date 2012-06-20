@@ -41,7 +41,6 @@
 	struct sockaddr_in servAddr;
 	
 	int server = socket(AF_INET, SOCK_STREAM, 0);
-	struct linger l;
 	bzero(&servAddr, sizeof(struct sockaddr_in));
 	servAddr.sin_family = AF_INET;
 	servAddr.sin_addr.s_addr = INADDR_ANY;
@@ -57,9 +56,8 @@
 	}
 	
 	int keepalive = 0;
-	l.l_onoff = 1;
-	l.l_linger = 1;
-	if (setsockopt(server, SOL_SOCKET, SO_LINGER, &l, sizeof(struct linger)) != 0) {
+	int reuseAddr = 1;
+	if (setsockopt(server, SOL_SOCKET, SO_REUSEADDR, &reuseAddr, sizeof(int)) != 0) {
 		WALog(LogPriorityError, @"Failed to disable SO_LINGER");
 	}
 	if (setsockopt(server, SOL_SOCKET, SO_KEEPALIVE, &keepalive, sizeof(int)) != 0) {
